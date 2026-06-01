@@ -1,0 +1,7 @@
+CREATE TABLE slangs (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    word TEXT NOT NULL,
+    meaning TEXT NOT NULL,
+    example TEXT
+);

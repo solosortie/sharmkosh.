@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sharmkosh - Males kyu safe?</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2334d399' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z'/%3E%3Cpath d='M6 6h10'/%3E%3Cpath d='M6 10h10'/%3E%3C/svg%3E">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up {
+            animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+    </style>
+</head>
+<body class="bg-zinc-950 text-zinc-50 min-h-screen font-sans selection:bg-emerald-500/20 selection:text-emerald-400 relative overflow-x-hidden">
+
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-[500px] bg-radial from-emerald-500/5 via-transparent to-transparent pointer-events-none z-0"></div>
+
+    <header class="border-b border-zinc-900 bg-zinc-950/70 backdrop-blur-xl sticky top-0 z-40 transition-all duration-300">
+        <div class="max-w-5xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3.5 group cursor-pointer">
+                <div class="bg-gradient-to-br from-emerald-400 to-teal-600 p-2.5 rounded-xl shadow-lg shadow-emerald-500/10 group-hover:scale-105 transition-all duration-300">
+                    <i data-lucide="book-marked" class="w-5 h-5 text-zinc-950 stroke-[2.5]"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-black tracking-tight bg-gradient-to-r from-zinc-100 to-zinc-400 bg-clip-text text-transparent">sharmkosh<span class="text-emerald-400">.</span></h1>
+                    <p class="text-[11px] text-zinc-500 font-medium tracking-wide uppercase">ab Mardo ki maari jaayegi Gaan*</p>
+                </div>
+            </div>
+            
+            <button onclick="toggleModal(true)" class="group flex items-center gap-2 bg-zinc-900 hover:bg-zinc-850 text-zinc-200 hover:text-white border border-zinc-800 hover:border-zinc-700 font-medium px-4 py-2.5 rounded-xl transition-all duration-300 active:scale-98 shadow-2xl cursor-pointer">
+                <i data-lucide="plus" class="w-4 h-4 text-emerald-400 group-hover:rotate-90 transition-transform duration-300"></i>
+                <span>Add Summ</span>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-6 py-16 relative z-10">
+        
+        <div class="relative max-w-lg mx-auto mb-16 group">
+            <div class="absolute -inset-0.5 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 rounded-2xl blur opacity-0 group-focus-within:opacity-100 transition duration-500"></div>
+            <div class="relative flex items-center">
+                <i data-lucide="search" class="w-5 h-5 text-zinc-500 absolute left-4 group-focus-within:text-emerald-400 transition-colors duration-300"></i>
+                <input type="text" id="searchInput" oninput="handleSearch()" placeholder="Search the sharm kosh.." class="w-full bg-zinc-900/90 border border-zinc-800/80 rounded-2xl pl-12 pr-4 py-4 text-zinc-200 placeholder-zinc-500 focus:outline-none focus:border-zinc-700 transition-all shadow-inner backdrop-blur-md">
+            </div>
+        </div>
+
+        <div id="cardsContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="bg-zinc-900/30 border border-zinc-900 rounded-2xl p-6 h-48 animate-pulse"></div>
+            <div class="bg-zinc-900/30 border border-zinc-900 rounded-2xl p-6 h-48 animate-pulse"></div>
+            <div class="bg-zinc-900/30 border border-zinc-900 rounded-2xl p-6 h-48 animate-pulse"></div>
+        </div>
+    </main>
+
+    <div id="modalOverlay" class="fixed inset-0 bg-zinc-950/80 backdrop-blur-md z-50 hidden opacity-0 transition-all duration-300 flex items-center justify-center p-4">
+        <div id="modalBox" class="bg-zinc-900/90 border border-zinc-800/80 w-full max-w-md rounded-2xl p-7 shadow-2xl scale-95 opacity-0 transition-all duration-300 backdrop-blur-xl">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h3 class="text-lg font-bold text-zinc-100 tracking-tight">Expand it.</h3>
+                    <p class="text-xs text-zinc-500">Your boond to the saagar</p>
+                </div>
+                <button onclick="toggleModal(false)" class="text-zinc-500 hover:text-zinc-300 p-2 rounded-xl hover:bg-zinc-800/50 transition-all cursor-pointer">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+            </div>
+            
+            <form id="slangForm" onsubmit="handleSubmit(event)" class="space-y-5">
+                <div>
+                    <label class="block text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">The Shabd</label>
+                    <input type="text" id="word" required placeholder="soch bhadwe" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-200 focus:outline-none focus:border-emerald-500/30 focus:bg-zinc-950/40 transition-all duration-300">
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Definition</label>
+                    <textarea id="meaning" required rows="3" placeholder="Break it down" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-200 focus:outline-none focus:border-emerald-500/30 focus:bg-zinc-950/40 transition-all duration-300 resize-none"></textarea>
+                </div>
+                <div>
+                    <label class="block text-[10px] font-bold text-zinc-400 mb-2 uppercase tracking-widest">Live Example</label>
+                    <input type="text" id="example" placeholder="Try" class="w-full bg-zinc-950 border border-zinc-800 rounded-xl px-4 py-3 text-zinc-200 focus:outline-none focus:border-emerald-500/30 focus:bg-zinc-950/40 transition-all duration-300">
+                </div>
+                <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-zinc-950 font-semibold py-3.5 rounded-xl transition-all duration-300 mt-2 cursor-pointer flex items-center justify-center gap-2 shadow-xl shadow-emerald-500/10">
+                    <span>Post it</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="toastContainer" class="fixed bottom-6 right-6 z-50 flex flex-col gap-3"></div>
+
+    <script>
+        let allSlangs = [];
+        let debounceTimer;
+
+        lucide.createIcons();
+
+        // --- FETCH FROM CLOUDFLARE D1 ENDPOINT ---
+        async function fetchSlangs() {
+            try {
+                const response = await fetch('/api/slangs');
+                if (!response.ok) throw new Error('Database response failed');
+                allSlangs = await response.json();
+                renderCards(allSlangs);
+            } catch (error) {
+                document.getElementById('cardsContainer').innerHTML = `
+                    <div class="col-span-full text-center py-16 text-zinc-500 border border-dashed border-zinc-900 rounded-3xl bg-zinc-900/10">
+                        <i data-lucide="cloud-off" class="w-8 h-8 mx-auto mb-3 text-zinc-700"></i>
+                        <p class="text-sm font-medium">Couldn't stream the database. Confirm your D1 Bindings.</p>
+                    </div>
+                `;
+                lucide.createIcons();
+            }
+        }
+
+        // --- STAGGERED SOPHISTICATED RENDERING ---
+        function renderCards(data) {
+            const container = document.getElementById('cardsContainer');
+            if (data.length === 0) {
+                container.innerHTML = `
+                    <div class="col-span-full text-center py-16 text-zinc-500 border border-dashed border-zinc-900 rounded-3xl bg-zinc-900/10">
+                        <p class="text-sm">The digital vault is barren. Be the architect of slang.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = data.map((item, index) => `
+                <div class="bg-zinc-900/20 border border-zinc-900 hover:border-zinc-800/80 rounded-2xl p-6 transition-all duration-500 hover:-translate-y-1.5 flex flex-col justify-between group opacity-0 animate-fade-in-up hover:bg-zinc-900/40 relative overflow-hidden" style="animation-delay: ${index * 40}ms">
+                    <div class="absolute -right-12 -top-12 w-24 h-24 bg-emerald-500/5 rounded-full blur-xl group-hover:bg-emerald-500/10 transition-all duration-500"></div>
+                    
+                    <div>
+                        <div class="flex items-start justify-between mb-4 relative z-10">
+                            <h4 class="text-xl font-bold text-zinc-200 tracking-tight group-hover:text-emerald-400 transition-colors duration-300 select-all">${escapeHtml(item.word)}</h4>
+                            <div class="flex items-center gap-2">
+                                <button onclick="copyToClipboard('${escapeHtml(item.word)}', '${escapeHtml(item.meaning)}')" class="text-zinc-600 hover:text-zinc-400 p-1.5 rounded-lg hover:bg-zinc-800/50 transition-all cursor-pointer opacity-0 group-hover:opacity-100" title="Copy Card Context">
+                                    <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <p class="text-zinc-400/90 text-sm leading-relaxed font-normal">${escapeHtml(item.meaning)}</p>
+                    </div>
+                    ${item.example ? `
+                        <div class="mt-6 pt-4 border-t border-zinc-900/80 relative z-10">
+                            <p class="text-zinc-500 text-xs italic font-medium leading-relaxed">"${escapeHtml(item.example)}"</p>
+                        </div>
+                    ` : ''}
+                </div>
+            `).join('');
+            
+            lucide.createIcons();
+        }
+
+        // --- SUBMIT COMPONENT ---
+        async function handleSubmit(e) {
+            e.preventDefault();
+            const submitBtn = document.getElementById('submitBtn');
+            const word = document.getElementById('word').value.trim();
+            const meaning = document.getElementById('meaning').value.trim();
+            const example = document.getElementById('example').value.trim();
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<i data-lucide="loader" class="w-4 h-4 animate-spin"></i>`;
+            lucide.createIcons();
+
+            try {
+                const response = await fetch('/api/slangs', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ word, meaning, example })
+                });
+
+                if (!response.ok) throw new Error('Failed to synchronize data');
+
+                document.getElementById('slangForm').reset();
+                toggleModal(false);
+                fetchSlangs();
+                showToast('Slang immortalized in D1 Storage.', 'success');
+            } catch (error) {
+                showToast(error.message, 'error');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `<span>Post it</span>`;
+            }
+        }
+
+        // --- DEBOUNCED SEARCH ENGINE ---
+        function handleSearch() {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
+                const query = document.getElementById('searchInput').value.toLowerCase();
+                const filtered = allSlangs.filter(item => 
+                    item.word.toLowerCase().includes(query) || 
+                    item.meaning.toLowerCase().includes(query)
+                );
+                renderCards(filtered);
+            }, 180);
+        }
+
+        // --- SYSTEM ANIMATION CONTROLS ---
+        function toggleModal(show) {
+            const overlay = document.getElementById('modalOverlay');
+            const box = document.getElementById('modalBox');
+            if (show) {
+                overlay.classList.remove('hidden');
+                setTimeout(() => {
+                    overlay.classList.remove('opacity-0');
+                    box.classList.remove('scale-95', 'opacity-0');
+                }, 20);
+            } else {
+                overlay.classList.add('opacity-0');
+                box.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => overlay.classList.add('hidden'), 300);
+            }
+        }
+
+        async function copyToClipboard(word, meaning) {
+            try {
+                await navigator.clipboard.writeText(`*${word}*: ${meaning}`);
+                showToast('Copied to context clipboard.', 'success');
+            } catch {
+                showToast('Security block on copying.', 'error');
+            }
+        }
+
+        function showToast(message, type = 'success') {
+            const toast = document.createElement('div');
+            const isError = type === 'error';
+            toast.className = `flex items-center gap-3 px-4 py-3.5 rounded-xl border shadow-2xl transform transition-all duration-500 translate-y-4 opacity-0 ${isError ? 'bg-red-950/60 border-red-900/50 text-red-400' : 'bg-zinc-900/90 border-zinc-800 text-emerald-400'} backdrop-blur-xl`;
+            
+            toast.innerHTML = `
+                <i data-lucide="${isError ? 'alert-circle' : 'fingerprint'}" class="w-4 h-4"></i>
+                <span class="text-xs font-semibold tracking-wide">${message}</span>
+            `;
+            
+            document.getElementById('toastContainer').appendChild(toast);
+            lucide.createIcons();
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-4', 'opacity-0');
+            }, 10);
+            
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 500);
+            }, 3500);
+        }
+
+        function escapeHtml(str) {
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        }
+
+        window.onload = fetchSlangs;
+    </script>
+</body>
+</html>
