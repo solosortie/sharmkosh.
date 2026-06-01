@@ -8,12 +8,12 @@
 
 ---
 
-## Repository Architecture
+## Repo Architecture
 
 ```text
 .
-├── DB.sql                # SQL Schema blueprint for D1 initialization[cite: 1]
+├── DB.sql               
 ├── functions/
 │   └── api/
-│       └── slangs.js     # Edge Worker handling database operations[cite: 1, 3]
-└── index.html            # Main dashboard UI & Client-side search engine[cite: 1]
+│       └── slangs.js     
+└── index.html           
